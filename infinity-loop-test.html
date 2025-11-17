@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Lifecycle Loop</title>
+    <style>
+        :root {
+            --brand-green-500: #4EC84E;
+            --brand-green-600: #47B647;
+            --grey-300: #D0D5DD;
+            --grey-600: #5B5B5C;
+            --accent-yellow-300: #FDB022;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .loop-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+        }
+
+        .loop-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Stage Labels */
+        .stage-label {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--grey-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Hotspots */
+        .hotspot {
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .hotspot-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.98) 100%);
+            border: 3px solid var(--brand-green-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 8px 24px rgba(78, 200, 78, 0.25),
+                0 4px 12px rgba(0, 0, 0, 0.08),
+                0 0 0 0 rgba(78, 200, 78, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow:
+                    0 8px 24px rgba(78, 200, 78, 0.25),
+                    0 4px 12px rgba(0, 0, 0, 0.08),
+                    0 0 0 0 rgba(78, 200, 78, 0.4);
+            }
+            50% {
+                box-shadow:
+                    0 8px 24px rgba(78, 200, 78, 0.35),
+                    0 4px 12px rgba(0, 0, 0, 0.08),
+                    0 0 0 16px rgba(78, 200, 78, 0);
+            }
+        }
+
+        .hotspot-circle::before {
+            content: '+';
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--brand-green-500);
+        }
+
+        .hotspot:hover .hotspot-circle {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #EDFAED 0%, rgba(255, 255, 255, 0.98) 100%);
+        }
+
+        /* Traveler Dot */
+        .traveler {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-yellow-300), #FFB300);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow:
+                0 0 24px rgba(253, 176, 34, 0.8),
+                0 0 48px rgba(253, 176, 34, 0.4);
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .traveler::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(253, 176, 34, 0.4);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loop-container">
+        <!-- SVG Infinity Loop with 3D Crossover -->
+        <svg class="loop-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <!-- Soft Shadow Filter -->
+                <filter id="soft-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+                    <feOffset dx="0" dy="4" result="offsetblur"/>
+                    <feComponentTransfer>
+                        <feFuncA type="linear" slope="0.08"/>
+                    </feComponentTransfer>
+                    <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+
+                <!-- Arrow Marker -->
+                <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+                    <circle cx="6" cy="6" r="2" fill="var(--brand-green-500)" />
+                </marker>
+
+                <!-- Gradient for the loop -->
+                <linearGradient id="loopGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#4EC84E;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#47B647;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#4EC84E;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+
+            <!-- BACK SEGMENTS (appear to go behind at crossover) -->
+            <g id="back-segments">
+                <!-- Segment 1: Discovery (Left side, bottom half) -->
+                <path id="segment-discovery"
+                    d="M 300,450 C 150,450 150,300 150,300 C 150,300 150,250 200,200"
+                    fill="none"
+                    stroke="url(#loopGradient)"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    filter="url(#soft-shadow)"
+                />
+
+                <!-- Segment 4: Purchase (Right side, top half) -->
+                <path id="segment-purchase"
+                    d="M 800,200 C 850,250 850,300 850,300 C 850,300 850,450 700,450"
+                    fill="none"
+                    stroke="url(#loopGradient)"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    filter="url(#soft-shadow)"
+                />
+            </g>
+
+            <!-- FRONT SEGMENTS (appear to go in front at crossover) -->
+            <g id="front-segments">
+                <!-- Segment 2: Awareness (Left side, top half going to center) -->
+                <path id="segment-awareness"
+                    d="M 200,200 C 150,150 150,150 300,150 C 450,150 450,250 500,300"
+                    fill="none"
+                    stroke="url(#loopGradient)"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    filter="url(#soft-shadow)"
+                    marker-end="url(#arrowhead)"
+                />
+
+                <!-- Segment 3: Consideration (Center to right side top) -->
+                <path id="segment-consideration"
+                    d="M 500,300 C 550,350 550,450 700,450 C 850,450 850,350 800,300"
+                    fill="none"
+                    stroke="url(#loopGradient)"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    filter="url(#soft-shadow)"
+                />
+
+                <!-- Segment 5: Post-Purchase (Right side, bottom going to center) -->
+                <path id="segment-post-purchase"
+                    d="M 700,450 C 550,450 550,350 500,300"
+                    fill="none"
+                    stroke="url(#loopGradient)"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    filter="url(#soft-shadow)"
+                />
+
+                <!-- Segment 6: Re-engagement (Center back to left side) -->
+                <path id="segment-reengagement"
+                    d="M 500,300 C 450,250 450,450 300,450"
+                    fill="none"
+                    stroke="url(#loopGradient)"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    filter="url(#soft-shadow)"
+                    marker-end="url(#arrowhead)"
+                />
+            </g>
+
+            <!-- Complete path for animation reference (invisible) -->
+            <path id="complete-path"
+                d="M 300,450 C 150,450 150,300 150,300 C 150,300 150,250 200,200 C 150,150 150,150 300,150 C 450,150 450,250 500,300 C 550,350 550,450 700,450 C 850,450 850,450 850,300 C 850,300 850,250 800,200 C 850,150 850,150 700,150 C 550,150 550,250 500,300 C 450,350 450,450 300,450"
+                fill="none"
+                stroke="transparent"
+                stroke-width="1"
+            />
+        </svg>
+
+        <!-- Stage Labels -->
+        <div class="stage-label" style="top: 50%; left: 20px; transform: translateY(-50%);">DISCOVERY</div>
+        <div class="stage-label" style="top: 100px; left: 220px;">AWARENESS</div>
+        <div class="stage-label" style="top: 100px; right: 180px;">CONSIDERATION</div>
+        <div class="stage-label" style="top: 50%; right: 10px; transform: translateY(-50%);">PURCHASE</div>
+        <div class="stage-label" style="bottom: 80px; right: 150px;">POST-PURCHASE</div>
+        <div class="stage-label" style="bottom: 80px; left: 180px;">RE-ENGAGEMENT</div>
+
+        <!-- Hotspots -->
+        <div class="hotspot" style="top: 50%; left: 120px; transform: translateY(-50%);">
+            <div class="hotspot-circle"></div>
+        </div>
+        <div class="hotspot" style="top: 140px; left: 240px;">
+            <div class="hotspot-circle"></div>
+        </div>
+        <div class="hotspot" style="top: 140px; right: 210px;">
+            <div class="hotspot-circle"></div>
+        </div>
+        <div class="hotspot" style="top: 50%; right: 90px; transform: translateY(-50%);">
+            <div class="hotspot-circle"></div>
+        </div>
+        <div class="hotspot" style="bottom: 120px; right: 180px;">
+            <div class="hotspot-circle"></div>
+        </div>
+        <div class="hotspot" style="bottom: 120px; left: 260px;">
+            <div class="hotspot-circle"></div>
+        </div>
+
+        <!-- Traveling Dot -->
+        <div class="traveler"></div>
+    </div>
+
+    <script>
+        // Animate traveler along the path
+        const traveler = document.querySelector('.traveler');
+        const path = document.getElementById('complete-path');
+
+        if (path && traveler) {
+            const pathLength = path.getTotalLength();
+            const duration = 12000; // 12 seconds
+
+            function animate() {
+                const startTime = Date.now();
+
+                function update() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = (elapsed % duration) / duration;
+                    const distance = progress * pathLength;
+                    const point = path.getPointAtLength(distance);
+
+                    traveler.style.left = (point.x - 9) + 'px';
+                    traveler.style.top = (point.y - 9) + 'px';
+
+                    requestAnimationFrame(update);
+                }
+
+                update();
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>

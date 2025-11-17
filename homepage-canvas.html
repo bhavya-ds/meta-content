@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickReply.ai - Homepage Canvas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           PREMIUM DESIGN SYSTEM - Based on Style Kit
+           ============================================ */
+        :root {
+            /* Brand Colors */
+            --brand-green-700: #378E37;
+            --brand-green-600: #47B647;
+            --brand-green-500: #4EC84E;
+            --brand-green-400: #71D371;
+            --brand-green-300: #88DA88;
+            --brand-green-100: #C8EEC8;
+            --brand-green-20: #EDFAED;
+
+            /* Semantic Yellow (Accent) */
+            --accent-yellow-400: #FFB300;
+            --accent-yellow-300: #FDB022;
+            --accent-yellow-200: #FFD800;
+
+            /* Grey Scale */
+            --grey-900: #1D2939;
+            --grey-800: #282829;
+            --grey-700: #475467;
+            --grey-600: #5B5B5C;
+            --grey-500: #747475;
+            --grey-400: #8D8E8F;
+            --grey-300: #D0D5DD;
+            --grey-200: #F7F7F7;
+            --grey-100: #D9D9DB;
+            --grey-50: #F2F3F5;
+            --grey-35: #F9F9FA;
+
+            /* Base */
+            --white: #FFFFFF;
+            --black: #0F0F0F;
+
+            /* Typography */
+            --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+            /* Spacing */
+            --space-4: 4px;
+            --space-8: 8px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+            --space-64: 64px;
+            --space-96: 96px;
+            --space-128: 128px;
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+
+        /* Premium noise texture for depth */
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(-10%, 5%); }
+            30% { transform: translate(5%, -10%); }
+            40% { transform: translate(-5%, 15%); }
+            50% { transform: translate(-10%, 5%); }
+            60% { transform: translate(15%, 0); }
+            70% { transform: translate(0, 10%); }
+            80% { transform: translate(-15%, 0); }
+            90% { transform: translate(10%, 5%); }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ============================================
+           GLOBAL RESET
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-inter);
+            color: var(--grey-900);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================
+           ULTRA-PREMIUM NAVIGATION
+           ============================================ */
+        .nav-wrapper {
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+        }
+
+        .nav-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(78, 200, 78, 0.3) 50%,
+                transparent 100%);
+            opacity: 0.5;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px var(--space-48);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--brand-green-500) 0%, var(--brand-green-700) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: 0 8px 24px rgba(78, 200, 78, 0.25),
+                        0 2px 8px rgba(78, 200, 78, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-green-500);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-login {
+            padding: 11px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--white);
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: -0.01em;
+        }
+
+        .btn-login:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .btn-demo {
+            padding: 11px 26px;
+            background: linear-gradient(135deg, var(--brand-green-500) 0%, var(--brand-green-600) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(78, 200, 78, 0.3),
+                        0 2px 8px rgba(78, 200, 78, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-demo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(78, 200, 78, 0.4),
+                        0 4px 12px rgba(78, 200, 78, 0.3);
+        }
+
+        .btn-demo:hover::before {
+            opacity: 1;
+        }
+
+        /* ============================================
+           ULTRA-PREMIUM HERO SECTION
+           ============================================ */
+        .hero-wrapper {
+            background:
+                radial-gradient(ellipse 150% 100% at 50% 0%, rgba(18, 18, 18, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Animated noise texture overlay for premium feel */
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.03;
+            animation: grain 8s steps(10) infinite;
+            pointer-events: none;
+        }
+
+        /* Primary glow orb - animated */
+        .hero-glow-primary {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(
+                circle at center,
+                rgba(78, 200, 78, 0.15) 0%,
+                rgba(78, 200, 78, 0.08) 25%,
+                rgba(55, 142, 55, 0.04) 50%,
+                transparent 70%
+            );
+            transform: translateX(-50%);
+            filter: blur(60px);
+            animation: glow-pulse 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* Secondary accent glows */
+        .hero-glow-left {
+            position: absolute;
+            top: 40%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(
+                circle at center,
+                rgba(78, 200, 78, 0.06) 0%,
+                transparent 60%
+            );
+            filter: blur(80px);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .hero-glow-right {
+            position: absolute;
+            top: 60%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(
+                circle at center,
+                rgba(71, 182, 71, 0.05) 0%,
+                transparent 60%
+            );
+            filter: blur(80px);
+            animation: float 25s ease-in-out infinite reverse;
+            pointer-events: none;
+        }
+
+        /* Premium grid pattern with perspective */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(78, 200, 78, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(78, 200, 78, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: linear-gradient(to bottom,
+                transparent 0%,
+                black 15%,
+                black 70%,
+                transparent 100%
+            );
+            -webkit-mask-image: linear-gradient(to bottom,
+                transparent 0%,
+                black 15%,
+                black 70%,
+                transparent 100%
+            );
+            pointer-events: none;
+            transform: perspective(1000px) rotateX(60deg) scale(2);
+            transform-origin: center top;
+        }
+
+        /* Spotlight effect from top */
+        .hero-spotlight {
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse 80% 50% at 50% 50%,
+                rgba(255, 255, 255, 0.02) 0%,
+                transparent 50%
+            );
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-48);
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* ============================================
+           HERO CONTENT STYLING
+           ============================================ */
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13.5px;
+            font-weight: 500;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            letter-spacing: -0.01em;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--brand-green-500);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(78, 200, 78, 0.6);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-headline {
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-headline-gradient {
+            background: linear-gradient(135deg,
+                var(--white) 0%,
+                rgba(255, 255, 255, 0.85) 50%,
+                rgba(255, 255, 255, 0.7) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-highlight {
+            position: relative;
+            color: var(--white);
+        }
+
+        .hero-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: linear-gradient(90deg,
+                rgba(78, 200, 78, 0.3) 0%,
+                rgba(78, 200, 78, 0.2) 100%
+            );
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 64px;
+        }
+
+        .btn-primary {
+            padding: 16px 32px;
+            background: linear-gradient(135deg,
+                var(--accent-yellow-300) 0%,
+                var(--accent-yellow-400) 100%
+            );
+            color: var(--black);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 4px 16px rgba(253, 176, 34, 0.4),
+                0 2px 8px rgba(253, 176, 34, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                transparent,
+                rgba(255, 255, 255, 0.2)
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 24px rgba(253, 176, 34, 0.5),
+                0 4px 12px rgba(253, 176, 34, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            letter-spacing: -0.01em;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .hero-trust-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .trust-item {
+            text-align: center;
+        }
+
+        .trust-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .trust-number-accent {
+            color: var(--brand-green-400);
+        }
+
+        .trust-label {
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        /* ============================================
+           ULTRA-PREMIUM CONTENT SECTIONS
+           ============================================ */
+        .content-wrapper {
+            background: linear-gradient(180deg, #FAFAFA 0%, var(--white) 100%);
+            position: relative;
+        }
+
+        /* Sophisticated gradient transition from dark hero */
+        .content-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg,
+                rgba(0, 0, 0, 0.04) 0%,
+                rgba(0, 0, 0, 0.01) 50%,
+                transparent 100%
+            );
+            pointer-events: none;
+        }
+
+        /* Subtle accent line at top */
+        .content-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(78, 200, 78, 0.2) 50%,
+                transparent 100%
+            );
+        }
+
+        .content-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 120px var(--space-48);
+            position: relative;
+        }
+
+        /* ============================================
+           LIFECYCLE LOOP SECTION
+           ============================================ */
+        .lifecycle-section {
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 120px;
+            align-items: center;
+            min-height: 750px;
+        }
+
+        .lifecycle-intro {
+            position: sticky;
+            top: 140px;
+            align-self: start;
+        }
+
+        .lifecycle-title {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--grey-900);
+            margin-bottom: 32px;
+            letter-spacing: -0.04em;
+        }
+
+        .lifecycle-description {
+            font-size: 19px;
+            line-height: 1.65;
+            color: var(--grey-700);
+            letter-spacing: -0.01em;
+        }
+
+        /* Infinity Loop Container */
+        .lifecycle-loop-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* SVG Loop Styling */
+        .infinity-loop-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 24px rgba(78, 200, 78, 0.08));
+        }
+
+        .loop-path {
+            fill: none;
+            stroke: var(--brand-green-500);
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+
+        /* Animated Dot Traveling Loop */
+        .loop-traveler {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,
+                var(--accent-yellow-300) 0%,
+                var(--accent-yellow-400) 100%
+            );
+            box-shadow:
+                0 0 16px rgba(253, 176, 34, 0.6),
+                0 0 32px rgba(253, 176, 34, 0.3),
+                0 2px 8px rgba(253, 176, 34, 0.4);
+            position: absolute;
+            z-index: 10;
+            border: 2.5px solid rgba(255, 255, 255, 0.95);
+        }
+
+        .loop-traveler::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 2px solid rgba(253, 176, 34, 0.3);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        /* Hotspot Styling */
+        .loop-hotspot {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            z-index: 20;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hotspot-pulse {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2.5px solid var(--brand-green-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 4px 16px rgba(78, 200, 78, 0.2),
+                0 2px 8px rgba(0, 0, 0, 0.06),
+                0 0 0 0 rgba(78, 200, 78, 0.4);
+            animation: hotspot-pulse 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes hotspot-pulse {
+            0%, 100% {
+                box-shadow:
+                    0 4px 16px rgba(78, 200, 78, 0.2),
+                    0 2px 8px rgba(0, 0, 0, 0.06),
+                    0 0 0 0 rgba(78, 200, 78, 0.4);
+            }
+            50% {
+                box-shadow:
+                    0 4px 16px rgba(78, 200, 78, 0.3),
+                    0 2px 8px rgba(0, 0, 0, 0.06),
+                    0 0 0 12px rgba(78, 200, 78, 0);
+            }
+        }
+
+        .hotspot-pulse::before {
+            content: '+';
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--brand-green-500);
+            line-height: 1;
+        }
+
+        .loop-hotspot:hover .hotspot-pulse {
+            transform: scale(1.15);
+            border-color: var(--brand-green-600);
+            background: var(--brand-green-20);
+            box-shadow:
+                0 8px 24px rgba(78, 200, 78, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .loop-hotspot.active .hotspot-pulse {
+            background: linear-gradient(135deg,
+                var(--brand-green-500) 0%,
+                var(--brand-green-600) 100%
+            );
+            transform: scale(1.1);
+            border-color: var(--brand-green-600);
+            box-shadow:
+                0 8px 24px rgba(78, 200, 78, 0.4),
+                0 4px 12px rgba(78, 200, 78, 0.25);
+        }
+
+        .loop-hotspot.active .hotspot-pulse::before {
+            content: '×';
+            color: var(--white);
+            font-size: 28px;
+        }
+
+        /* Stage Labels */
+        .stage-label {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--grey-600);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            white-space: nowrap;
+            opacity: 0.8;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            position: absolute;
+            width: 320px;
+            background: var(--white);
+            border: 1px solid rgba(208, 213, 221, 0.4);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.08),
+                0 4px 16px rgba(0, 0, 0, 0.04);
+            opacity: 0;
+            transform: scale(0.94) translateY(12px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            z-index: 30;
+        }
+
+        .feature-card.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--brand-green-500) 0%,
+                var(--brand-green-600) 100%
+            );
+            border-radius: 16px 16px 0 0;
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg,
+                var(--brand-green-500) 0%,
+                var(--brand-green-600) 100%
+            );
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 16px rgba(78, 200, 78, 0.25);
+        }
+
+        .feature-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--grey-900);
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+
+        .feature-description {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--grey-700);
+            letter-spacing: -0.01em;
+        }
+
+        /* ============================================
+           TRUST SECTION
+           ============================================ */
+        .trust-section {
+            background: var(--grey-50);
+            border-top: 1px solid rgba(208, 213, 221, 0.3);
+            border-bottom: 1px solid rgba(208, 213, 221, 0.3);
+        }
+
+        .trust-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 100px var(--space-48);
+        }
+
+        .trust-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .trust-headline {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--grey-900);
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            height: 220px;
+            width: 220px;
+            background: var(--white);
+            border: 1px solid rgba(208, 213, 221, 0.25);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.04),
+                0 1px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .trust-badge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg,
+                rgba(78, 200, 78, 0.1) 0%,
+                transparent 50%,
+                rgba(78, 200, 78, 0.05) 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow:
+                0 12px 32px rgba(0, 0, 0, 0.08),
+                0 4px 12px rgba(0, 0, 0, 0.04),
+                0 0 0 1px rgba(78, 200, 78, 0.1);
+            border-color: rgba(78, 200, 78, 0.2);
+        }
+
+        .trust-badge:hover::before {
+            opacity: 1;
+        }
+
+        .trust-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.06));
+        }
+
+        .trust-badge:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Meta Business Partner badge specific styling */
+        .trust-badge-meta img {
+            object-fit: contain;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* Shopify Rating Badge */
+        .trust-badge-shopify {
+            background: var(--white);
+        }
+
+        .shopify-badge-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shopify-rating {
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--grey-900);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .shopify-stars {
+            font-size: 28px;
+            color: #95BC52;
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        .shopify-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--grey-700);
+            text-transform: none;
+            letter-spacing: -0.01em;
+        }
+
+        .trust-badge-shopify:hover .shopify-rating {
+            color: var(--brand-green-600);
+            transition: color 0.3s ease;
+        }
+
+        .trust-badge-shopify:hover .shopify-stars {
+            color: var(--brand-green-500);
+            transition: color 0.3s ease;
+        }
+
+        .customer-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-flow: row;
+            gap: 40px 48px;
+            align-items: start;
+        }
+
+        .tier-category {
+            grid-column: 1 / -1;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--grey-700);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-top: 48px;
+            margin-bottom: 12px;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .tier-category:first-child {
+            margin-top: 0;
+        }
+
+        .customer-logo {
+            height: 40px;
+            opacity: 0.5;
+            filter: grayscale(100%) brightness(0.9);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .customer-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.05);
+        }
+
+        .logo-placeholder {
+            height: 140px;
+            width: 100%;
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(249, 250, 251, 0.95) 100%
+                );
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(208, 213, 221, 0.25);
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.02),
+                0 4px 12px rgba(0, 0, 0, 0.03),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Subtle noise texture for premium feel */
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.015;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* Animated shimmer effect */
+        .logo-placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                transparent 100%
+            );
+            animation: shimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                left: -100%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            20%, 80% {
+                left: 100%;
+                opacity: 0.6;
+            }
+            90%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* Logo mark placeholder - sophisticated letterform suggestion */
+        .logo-placeholder svg,
+        .logo-placeholder img {
+            width: auto;
+            height: 40px;
+            opacity: 0.35;
+            filter: grayscale(100%) contrast(0.8);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-placeholder:hover {
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, 1) 0%,
+                    rgba(237, 250, 237, 1) 100%
+                );
+            border-color: rgba(78, 200, 78, 0.2);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.02),
+                0 8px 24px rgba(78, 200, 78, 0.08),
+                0 16px 48px rgba(78, 200, 78, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+        }
+
+        .logo-placeholder:hover svg,
+        .logo-placeholder:hover img {
+            opacity: 0.7;
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.05);
+        }
+
+        .logo-placeholder:hover::after {
+            animation-duration: 3s;
+        }
+
+        /* ============================================
+           FEATURE SECTIONS (Discovery, Awareness, etc.)
+           ============================================ */
+        .feature-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-section-dark {
+            background: linear-gradient(135deg,
+                rgba(15, 15, 15, 1) 0%,
+                rgba(25, 25, 25, 1) 100%
+            );
+            color: var(--white);
+        }
+
+        .feature-section-light {
+            background: var(--white);
+            color: var(--grey-900);
+        }
+
+        .feature-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 120px var(--space-48);
+        }
+
+        .feature-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .feature-text {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .feature-category {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--brand-green-500);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .feature-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--white);
+            letter-spacing: -0.03em;
+            margin: 0;
+        }
+
+        .feature-section-light .feature-title {
+            color: var(--grey-900);
+        }
+
+        .feature-benefits {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-benefit {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .benefit-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--brand-green-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .benefit-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: -0.01em;
+        }
+
+        .feature-section-light .benefit-text {
+            color: var(--grey-700);
+        }
+
+        .feature-mockup {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mockup-placeholder {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(255, 255, 255, 0.02) 100%
+            );
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-placeholder::before {
+            content: 'Product Screenshot';
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .feature-section-light .mockup-placeholder {
+            background: linear-gradient(135deg,
+                rgba(208, 213, 221, 0.1) 0%,
+                rgba(208, 213, 221, 0.05) 100%
+            );
+            border: 1px solid rgba(208, 213, 221, 0.3);
+        }
+
+        .feature-section-light .mockup-placeholder::before {
+            color: var(--grey-400);
+        }
+
+        /* ============================================
+           PREMIUM ALTERNATING SECTIONS
+           ============================================ */
+        .section-light {
+            background: var(--white);
+            position: relative;
+        }
+
+        .section-grey {
+            background: linear-gradient(180deg, #FAFAFA 0%, var(--grey-50) 50%, #FAFAFA 100%);
+            border-top: 1px solid rgba(208, 213, 221, 0.3);
+            border-bottom: 1px solid rgba(208, 213, 221, 0.3);
+            position: relative;
+        }
+
+        /* Subtle radial gradient overlay for depth */
+        .section-grey::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse 100% 50% at 50% 50%,
+                rgba(78, 200, 78, 0.01) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
+        }
+
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 120px var(--space-48);
+            position: relative;
+        }
+
+        /* ============================================
+           ULTRA-PREMIUM FOOTER
+           ============================================ */
+        .footer-wrapper {
+            background:
+                radial-gradient(ellipse 100% 60% at 50% 100%, rgba(18, 18, 18, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top accent line */
+        .footer-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(78, 200, 78, 0.3) 50%,
+                transparent 100%
+            );
+        }
+
+        /* Subtle bottom glow */
+        .footer-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 200px;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(78, 200, 78, 0.04) 0%,
+                transparent 60%
+            );
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px var(--space-48);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           PREMIUM PLACEHOLDER BLOCKS
+           ============================================ */
+        .placeholder-block {
+            background: linear-gradient(135deg,
+                rgba(78, 200, 78, 0.03) 0%,
+                rgba(78, 200, 78, 0.01) 100%
+            );
+            border: 1px solid rgba(78, 200, 78, 0.15);
+            border-radius: 16px;
+            padding: 80px 60px;
+            text-align: center;
+            color: var(--grey-700);
+            font-size: 15px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .placeholder-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(78, 200, 78, 0.3) 50%,
+                transparent 100%
+            );
+        }
+
+        .placeholder-block strong {
+            display: block;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--grey-900);
+            letter-spacing: -0.02em;
+        }
+
+        .placeholder-dark {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.03) 0%,
+                rgba(255, 255, 255, 0.01) 100%
+            );
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .placeholder-dark strong {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .placeholder-dark::before {
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                transparent 100%
+            );
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-32 {
+            margin-bottom: var(--space-32);
+        }
+
+        .mb-64 {
+            margin-bottom: var(--space-64);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION (Premium Dark) -->
+    <nav class="nav-wrapper">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">Q</div>
+                <span>QuickReply.ai</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#integrations">Integrations</a></li>
+                <li><a href="#partners">Partners</a></li>
+            </ul>
+
+            <div class="nav-cta">
+                <button class="btn-login">Login</button>
+                <button class="btn-demo">Book a Demo</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Ultra-Premium Dark with layered lighting) -->
+    <section class="hero-wrapper">
+        <!-- Layered lighting effects -->
+        <div class="hero-glow-primary"></div>
+        <div class="hero-glow-left"></div>
+        <div class="hero-glow-right"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-spotlight"></div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <!-- Badge -->
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Trusted by 10,000+ businesses worldwide
+                </div>
+
+                <!-- Headline -->
+                <h1 class="hero-headline">
+                    <span class="hero-headline-gradient">WhatsApp Marketing</span><br>
+                    <span class="hero-headline-gradient">Automation for</span> <span class="hero-highlight">B2C</span>
+                </h1>
+
+                <!-- Description -->
+                <p class="hero-description">
+                    B2C brands use QuickReply to automate WhatsApp campaigns across the lifecycle
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="hero-cta-group">
+                    <button class="btn-primary">Book Demo</button>
+                    <button class="btn-secondary">Check Pricing</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIFECYCLE LOOP SECTION (Premium White) -->
+    <section class="content-wrapper">
+        <div class="content-container">
+            <div class="lifecycle-section">
+                <!-- Left: Intro Content -->
+                <div class="lifecycle-intro">
+                    <h2 class="lifecycle-title">WhatsApp Messaging Across the Lifecycle</h2>
+                    <p class="lifecycle-description">
+                        Every stage presents an opportunity to chat with customers and grow. QuickReply lets you configure these chat-worthy moments.
+                    </p>
+                </div>
+
+                <!-- Right: Interactive Loop -->
+                <div class="lifecycle-loop-container">
+                    <!-- Animated Traveler Dot -->
+                    <div class="loop-traveler"></div>
+
+                    <!-- SVG Infinity Loop -->
+                    <svg class="infinity-loop-svg" viewBox="0 0 900 520" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Soft Shadow Filter -->
+                            <filter id="soft-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#000000" flood-opacity="0.1" />
+                            </filter>
+                        </defs>
+
+                        <!-- Infinity Loop Paths with 3D Crossover Effect -->
+                        <!-- BACK SEGMENTS (drawn first, appear behind at crossover) -->
+                        <g filter="url(#soft-shadow)">
+                            <!-- Segment 2: Awareness (top left, crosses BEHIND) -->
+                            <path id="segment-awareness" class="loop-path"
+                                d="M 280,130
+                                   C 340,80 380,80 450,130
+                                   C 480,150 490,180 490,210"
+                            />
+
+                            <!-- Segment 5: Post-Purchase (bottom right, crosses BEHIND) -->
+                            <path id="segment-post-purchase" class="loop-path"
+                                d="M 670,390
+                                   C 610,440 570,440 500,390
+                                   C 470,370 460,340 460,310"
+                            />
+                        </g>
+
+                        <!-- FRONT SEGMENTS (drawn last, appear in front at crossover) -->
+                        <g filter="url(#soft-shadow)">
+                            <!-- Segment 1: Discovery (left side going up) -->
+                            <path id="segment-discovery" class="loop-path"
+                                d="M 230,390
+                                   C 150,390 120,340 120,260
+                                   C 120,180 150,130 230,130
+                                   C 250,130 265,132 280,135"
+                            />
+
+                            <!-- Segment 3: Consideration (top right) -->
+                            <path id="segment-consideration" class="loop-path"
+                                d="M 500,210
+                                   C 510,180 520,150 570,130
+                                   C 640,100 700,130 750,180
+                                   C 780,210 780,230 780,260"
+                            />
+
+                            <!-- Segment 4: Re-engagement (bottom left, crosses IN FRONT) -->
+                            <path id="segment-reengagement" class="loop-path"
+                                d="M 410,310
+                                   C 380,340 350,370 280,390
+                                   C 250,400 240,395 230,390"
+                            />
+                        </g>
+
+                        <!-- Complete path for traveler animation (invisible) -->
+                        <path id="complete-path"
+                            d="M 230,390
+                               C 150,390 120,340 120,260
+                               C 120,180 150,130 230,130
+                               C 250,130 265,132 280,135
+                               C 340,80 380,80 450,130
+                               C 480,150 490,180 490,210
+                               C 510,180 520,150 570,130
+                               C 640,100 700,130 750,180
+                               C 780,210 780,230 780,260
+                               C 780,340 750,390 670,390
+                               C 650,390 635,388 620,385
+                               C 610,440 570,440 500,390
+                               C 470,370 460,340 460,310
+                               C 380,340 350,370 280,390
+                               C 250,400 240,395 230,390 Z"
+                            fill="none"
+                            stroke="transparent"
+                            stroke-width="1"
+                        />
+                    </svg>
+
+                    <!-- Stage Labels -->
+                    <div class="stage-label" style="top: 50%; left: 20px; transform: translateY(-50%);">DISCOVERY</div>
+                    <div class="stage-label" style="top: 80px; left: 250px;">AWARENESS</div>
+                    <div class="stage-label" style="top: 80px; right: 210px;">CONSIDERATION</div>
+                    <div class="stage-label" style="top: 50%; right: 20px; transform: translateY(-50%);">PURCHASE</div>
+                    <div class="stage-label" style="bottom: 80px; right: 160px;">POST-PURCHASE</div>
+                    <div class="stage-label" style="bottom: 80px; left: 170px;">RE-ENGAGEMENT</div>
+
+                    <!-- Hotspot 1: Discovery -->
+                    <div class="loop-hotspot" style="top: 50%; left: 92px; transform: translateY(-50%);" data-feature="discovery">
+                        <div class="hotspot-pulse"></div>
+                    </div>
+
+                    <!-- Hotspot 2: Awareness -->
+                    <div class="loop-hotspot" style="top: 102px; left: 252px;" data-feature="awareness">
+                        <div class="hotspot-pulse"></div>
+                    </div>
+
+                    <!-- Hotspot 3: Consideration -->
+                    <div class="loop-hotspot" style="top: 102px; right: 208px;" data-feature="consideration">
+                        <div class="hotspot-pulse"></div>
+                    </div>
+
+                    <!-- Hotspot 5: Purchase -->
+                    <div class="loop-hotspot" style="top: 50%; right: 82px; transform: translateY(-50%);" data-feature="purchase">
+                        <div class="hotspot-pulse"></div>
+                    </div>
+
+                    <!-- Hotspot 4: Post-Purchase -->
+                    <div class="loop-hotspot" style="bottom: 102px; right: 188px;" data-feature="post-purchase">
+                        <div class="hotspot-pulse"></div>
+                    </div>
+
+                    <!-- Hotspot 6: Re-engagement -->
+                    <div class="loop-hotspot" style="bottom: 102px; left: 202px;" data-feature="re-engagement">
+                        <div class="hotspot-pulse"></div>
+                    </div>
+
+                    <!-- Feature Cards -->
+                    <!-- Discovery Card -->
+                    <div class="feature-card" id="card-discovery" style="top: 200px; left: -60px;">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-name">Reach New Prospects</div>
+                        <div class="feature-description">
+                            Click-to-WhatsApp ads and QR codes capture prospects into QuickReply.
+                        </div>
+                    </div>
+
+                    <!-- Awareness Card -->
+                    <div class="feature-card" id="card-awareness" style="top: 20px; left: 200px;">
+                        <div class="feature-icon">📢</div>
+                        <div class="feature-name">Build Brand Awareness</div>
+                        <div class="feature-description">
+                            QuickReply sends WhatsApp broadcasts with rich media to segmented audiences at scale.
+                        </div>
+                    </div>
+
+                    <!-- Consideration Card -->
+                    <div class="feature-card" id="card-consideration" style="top: 20px; right: 140px;">
+                        <div class="feature-icon">🛍️</div>
+                        <div class="feature-name">Drive Product Consideration</div>
+                        <div class="feature-description">
+                            QuickReply delivers WhatsApp product catalogs with search and recommendations.
+                        </div>
+                    </div>
+
+                    <!-- Purchase Card -->
+                    <div class="feature-card" id="card-purchase" style="top: 50%; right: -60px; transform: translateY(-50%);">
+                        <div class="feature-icon">💳</div>
+                        <div class="feature-name">Close the Sale</div>
+                        <div class="feature-description">
+                            QuickReply's smartbots clarify last moment purchase questions & offer checkout links.
+                        </div>
+                    </div>
+
+                    <!-- Post-Purchase Card -->
+                    <div class="feature-card" id="card-post-purchase" style="bottom: 20px; right: 120px;">
+                        <div class="feature-icon">📦</div>
+                        <div class="feature-name">Deliver & Support</div>
+                        <div class="feature-description">
+                            QuickReply automates order updates, shipping notifications, and support access.
+                        </div>
+                    </div>
+
+                    <!-- Re-engagement Card -->
+                    <div class="feature-card" id="card-re-engagement" style="bottom: 20px; left: 240px;">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-name">Win Back Customers</div>
+                        <div class="feature-description">
+                            QuickReply triggers WhatsApp campaigns based on inactivity with personalized offers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST SECTION -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <!-- Header -->
+            <div class="trust-header">
+                <h2 class="trust-headline">Markets love QuickReply's product, implementation and support</h2>
+            </div>
+
+            <!-- Top Tier: Trust Badges -->
+            <div class="trust-badges">
+                <a href="https://www.g2.com/products/quickreply-ai/reviews" target="_blank" rel="noopener noreferrer" class="trust-badge">
+                    <img src="Chatbots_MomentumLeader_Leader (1).png" alt="G2 Momentum Leader Spring 2025">
+                </a>
+                <a href="https://www.g2.com/products/quickreply-ai/reviews" target="_blank" rel="noopener noreferrer" class="trust-badge">
+                    <img src="Chatbots_BestSupport_QualityOfSupport (1).png" alt="G2 Best Support Spring 2025">
+                </a>
+                <a href="https://www.g2.com/products/quickreply-ai/reviews" target="_blank" rel="noopener noreferrer" class="trust-badge">
+                    <img src="Chatbots_HighPerformer_HighPerformer.png" alt="G2 High Performer Spring 2025">
+                </a>
+                <a href="https://www.g2.com/products/quickreply-ai/reviews" target="_blank" rel="noopener noreferrer" class="trust-badge">
+                    <img src="Chatbots_HighPerformer_Mid-Market_India_HighPerformer.png" alt="G2 High Performer Mid-Market India Spring 2025">
+                </a>
+                <a href="https://www.facebook.com/business/partner-directory/search?solution_type=messaging&id=8561750983906037&section=overview" target="_blank" rel="noopener noreferrer" class="trust-badge trust-badge-meta">
+                    <img src="MBP.png" alt="Meta Business Partner">
+                </a>
+                <a href="https://apps.shopify.com/helpdesk-livechat-chatbots" target="_blank" rel="noopener noreferrer" class="trust-badge trust-badge-shopify">
+                    <div class="shopify-badge-content">
+                        <div class="shopify-rating">4.9</div>
+                        <div class="shopify-stars">★★★★★</div>
+                        <div class="shopify-text">on Shopify</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Bottom Tier: Customer Logos by Business Type - Unified Grid -->
+            <div class="customer-tiers">
+                <!-- Startups -->
+                <div class="tier-category">Startups</div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+
+                <!-- Scale-Ups -->
+                <div class="tier-category">Scale-Ups</div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+
+                <!-- Enterprises -->
+                <div class="tier-category">Enterprises</div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Interactive Hotspot Logic
+        document.querySelectorAll('.loop-hotspot').forEach(hotspot => {
+            hotspot.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const featureId = this.getAttribute('data-feature');
+                const card = document.getElementById(`card-${featureId}`);
+
+                // Check if THIS hotspot is currently active
+                const isCurrentlyActive = this.classList.contains('active');
+
+                // Close all cards and hotspots first
+                document.querySelectorAll('.loop-hotspot').forEach(h => h.classList.remove('active'));
+                document.querySelectorAll('.feature-card').forEach(c => c.classList.remove('active'));
+
+                // If it wasn't active, open it. If it was active, keep it closed (toggle behavior)
+                if (!isCurrentlyActive) {
+                    this.classList.add('active');
+                    card.classList.add('active');
+                }
+            });
+        });
+
+        // Close cards when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.loop-hotspot') && !e.target.closest('.feature-card')) {
+                document.querySelectorAll('.loop-hotspot').forEach(h => h.classList.remove('active'));
+                document.querySelectorAll('.feature-card').forEach(c => c.classList.remove('active'));
+            }
+        });
+
+        // Animate the traveling dot along the infinity loop path
+        const traveler = document.querySelector('.loop-traveler');
+        const path = document.getElementById('complete-path');
+
+        if (traveler && path) {
+            function animateTraveler() {
+                const pathLength = path.getTotalLength();
+                const duration = 12000; // 12 seconds for full loop
+                const startTime = Date.now();
+
+                function update() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = (elapsed % duration) / duration;
+                    const distance = progress * pathLength;
+                    const point = path.getPointAtLength(distance);
+
+                    traveler.style.left = (point.x - 8) + 'px';
+                    traveler.style.top = (point.y - 8) + 'px';
+
+                    requestAnimationFrame(update);
+                }
+
+                update();
+            }
+
+            animateTraveler();
+        }
+    </script>
+
+    <!-- LIFECYCLE ENABLEMENT INTRO SECTION -->
+    <section class="section-light">
+        <div class="section-container" style="padding-top: 96px; padding-bottom: 64px; text-align: center;">
+            <h2 style="font-size: 48px; font-weight: 700; line-height: 1.2; color: var(--grey-900); margin-bottom: 20px; letter-spacing: -0.03em;">
+                Turn "just another seller" into "this brand is with me every step"
+            </h2>
+            <p style="font-size: 20px; line-height: 1.6; color: var(--grey-700); max-width: 800px; margin: 0 auto; letter-spacing: -0.01em;">
+                Your customers move through discovery → consideration → purchase → and beyond. QuickReply helps you show up with the right message at every moment that matters.
+            </p>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION: DISCOVERY -->
+    <section class="feature-section feature-section-dark">
+        <div class="feature-container">
+            <div class="feature-content">
+                <!-- Left: Text Content -->
+                <div class="feature-text">
+                    <div class="feature-category">ACQUIRE AND GET CHATTING WITH CUSTOMERS</div>
+                    <h2 class="feature-title">Turn "how do I reach them?" into "they're just a message away" with instant WhatsApp access</h2>
+                    <ul class="feature-benefits">
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Cut down on response time by launching AI bots to start chatting with your CTWA traffic immediately</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Generate trackable QR codes and embed customizable chat widgets on your website</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Track every prospect's source and context automatically in QuickReply</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Mockup/Screenshot -->
+                <div class="feature-mockup">
+                    <div class="mockup-placeholder">
+                        <!-- Product screenshot will go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION: AWARENESS -->
+    <section class="feature-section feature-section-light">
+        <div class="feature-container">
+            <div class="feature-content">
+                <!-- Left: Text Content -->
+                <div class="feature-text">
+                    <div class="feature-category">KEEP CUSTOMERS HOOKED TO PERSONALIZED MESSAGES</div>
+                    <h2 class="feature-title">Turn "just another brand" into "this is for me" with personalized campaigns</h2>
+                    <ul class="feature-benefits">
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Design multi-step, multi-day campaigns that adapt based on customer actions and preferences in real-time</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Send rich media broadcasts with images, videos, and interactive buttons that drive engagement at scale</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Segment audiences dynamically and trigger contextual messages based on behavior, milestones, or life events</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Mockup/Screenshot -->
+                <div class="feature-mockup">
+                    <div class="mockup-placeholder">
+                        <!-- Product screenshot will go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION: CONSIDERATION -->
+    <section class="feature-section feature-section-dark">
+        <div class="feature-container">
+            <div class="feature-content">
+                <!-- Left: Text Content -->
+                <div class="feature-text">
+                    <div class="feature-category">SUGGEST PRODUCTS SO GOOD THEY BUY AGAIN AND AGAIN</div>
+                    <h2 class="feature-title">Turn "what's right for me?" into "they get me!" with smart recommendations</h2>
+                    <ul class="feature-benefits">
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Share rich catalogs with images, descriptions, and pricing right in WhatsApp to simplify browsing</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Deploy smartbots that understand customer needs and suggest the perfect match from your offerings</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Deliver personalized recommendations based on preferences, behavior, and past interactions</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Mockup/Screenshot -->
+                <div class="feature-mockup">
+                    <div class="mockup-placeholder">
+                        <!-- Product screenshot will go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION: PURCHASE -->
+    <section class="feature-section feature-section-light">
+        <div class="feature-container">
+            <div class="feature-content">
+                <!-- Left: Text Content -->
+                <div class="feature-text">
+                    <div class="feature-category">SAVE CONVERSIONS BEFORE THEY SLIP AWAY</div>
+                    <h2 class="feature-title">Turn "maybe later" into "I'm in" with instant purchase support</h2>
+                    <ul class="feature-benefits">
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Deploy smartbots that answer pricing, terms, and eligibility questions instantly when customers hesitate</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Share personalized purchase links directly in chat to eliminate friction and close the deal</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Recover drop-offs by proactively reaching out with answers, incentives, and one-click conversion paths</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Mockup/Screenshot -->
+                <div class="feature-mockup">
+                    <div class="mockup-placeholder">
+                        <!-- Product screenshot will go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION: POST-PURCHASE -->
+    <section class="feature-section feature-section-dark">
+        <div class="feature-container">
+            <div class="feature-content">
+                <!-- Left: Text Content -->
+                <div class="feature-text">
+                    <div class="feature-category">DELIVER VALUE THAT KEEPS THEM COMING BACK</div>
+                    <h2 class="feature-title">Turn "what happens next?" into "they've got me covered" with proactive support</h2>
+                    <ul class="feature-benefits">
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Automate confirmations, status updates, and reminders so customers stay informed without lifting a finger</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Give instant access to support via smartbots that resolve common issues and escalate complex cases seamlessly</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Share onboarding guides, usage tips, and personalized recommendations to maximize product adoption and satisfaction</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Mockup/Screenshot -->
+                <div class="feature-mockup">
+                    <div class="mockup-placeholder">
+                        <!-- Product screenshot will go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION: RE-ENGAGEMENT -->
+    <section class="feature-section feature-section-light">
+        <div class="feature-container">
+            <div class="feature-content">
+                <!-- Left: Text Content -->
+                <div class="feature-text">
+                    <div class="feature-category">WIN BACK CUSTOMERS WHO'VE GONE QUIET</div>
+                    <h2 class="feature-title">Turn "they forgot about me" into "they missed me!" with smart re-engagement</h2>
+                    <ul class="feature-benefits">
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Trigger personalized campaigns based on inactivity, milestones, or behavior changes to bring customers back</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Send targeted incentives, exclusive offers, and "we miss you" messages that feel genuine and timely</span>
+                        </li>
+                        <li class="feature-benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span class="benefit-text">Reconnect dormant customers with relevant updates, new features, or products tailored to their past engagement</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Mockup/Screenshot -->
+                <div class="feature-mockup">
+                    <div class="mockup-placeholder">
+                        <!-- Product screenshot will go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SHOWCASE SECTION -->
+    <section class="feature-section feature-section-dark" style="padding: 120px 0;">
+        <div class="feature-container">
+            <div style="text-align: center; margin-bottom: 64px;">
+                <h2 style="font-size: 56px; font-weight: 700; line-height: 1.2; color: var(--white); margin-bottom: 32px; letter-spacing: -0.03em;">
+                    Make <span style="color: var(--brand-green-400);">"they never respond"</span> a thing of the past
+                </h2>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px;">
+                <button style="padding: 14px 28px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--white); border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); letter-spacing: -0.01em; font-family: var(--font-inter);">
+                    Multi-Agent Inbox
+                </button>
+                <button style="padding: 14px 28px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--white); border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); letter-spacing: -0.01em; font-family: var(--font-inter);">
+                    WhatsApp Pop-up
+                </button>
+                <button style="padding: 14px 28px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--white); border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); letter-spacing: -0.01em; font-family: var(--font-inter);">
+                    Revenue Tracking
+                </button>
+                <button style="padding: 14px 28px; background: linear-gradient(135deg, var(--brand-green-500) 0%, var(--brand-green-600) 100%); border: none; color: var(--white); border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 16px rgba(78, 200, 78, 0.3), 0 2px 8px rgba(78, 200, 78, 0.2); letter-spacing: -0.01em; font-family: var(--font-inter);">
+                    Click-to-WhatsApp Ads
+                </button>
+            </div>
+
+            <!-- Placeholder for feature content -->
+            <div style="max-width: 1100px; margin: 0 auto;">
+                <div class="mockup-placeholder" style="aspect-ratio: 16 / 9;">
+                    <!-- Feature demo will go here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Ultra-Premium Dark) -->
+    <footer class="footer-wrapper">
+        <div class="footer-container">
+            <div class="placeholder-block placeholder-dark">
+                <strong>FOOTER</strong><br>
+                Ultra-premium dark footer with radial gradient, subtle bottom glow<br>
+                Accent line at top • Glassmorphism effects • Layered depth<br><br>
+                Links, legal, social, newsletter signup • Matches nav aesthetic perfectly
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

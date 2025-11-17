@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Infinity Loop - Customer Lifecycle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #FFFFFF;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* SVG Path Styling */
+        .loop-path {
+            fill: none;
+            stroke: #4EC84E;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* SVG Text Labels */
+        .loop-label {
+            font-family: "Inter", sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            fill: #5B5B5C;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-anchor: middle;
+        }
+
+        /* Hotspot Circles */
+        .hotspot-group {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hotspot-group:hover {
+            transform: scale(1.1);
+        }
+
+        .hotspot-circle {
+            fill: #FFFFFF;
+            stroke: #4EC84E;
+            stroke-width: 3;
+        }
+
+        .hotspot-icon {
+            fill: #4EC84E;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        /* Traveler Dot */
+        .traveler-dot {
+            fill: #FDB022;
+            filter: drop-shadow(0 0 8px rgba(253, 176, 34, 0.6));
+        }
+
+        .traveler-ring {
+            fill: none;
+            stroke: rgba(253, 176, 34, 0.4);
+            stroke-width: 2;
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                r: 8;
+                opacity: 1;
+            }
+            100% {
+                r: 14;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg width="100%" viewBox="0 0 900 520" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <!-- Soft Shadow Filter -->
+                <filter id="soft-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#000000" flood-opacity="0.1" />
+                </filter>
+
+                <!-- Arrow Marker -->
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L10,3.5 L0,7 Z" fill="#4EC84E" />
+                </marker>
+            </defs>
+
+            <!-- Infinity Loop Paths with 3D Crossover Effect -->
+            <!-- BACK SEGMENTS (drawn first, appear behind at crossover) -->
+            <g filter="url(#soft-shadow)">
+                <!-- Segment 2: Awareness (top left, crosses BEHIND) -->
+                <path id="segment-awareness" class="loop-path"
+                    d="M 280,130
+                       C 340,80 380,80 450,130
+                       C 480,150 490,180 490,210"
+                />
+
+                <!-- Segment 5: Post-Purchase (bottom right, crosses BEHIND) -->
+                <path id="segment-post-purchase" class="loop-path"
+                    d="M 670,390
+                       C 610,440 570,440 500,390
+                       C 470,370 460,340 460,310"
+                />
+            </g>
+
+            <!-- FRONT SEGMENTS (drawn last, appear in front at crossover) -->
+            <g filter="url(#soft-shadow)">
+                <!-- Segment 1: Discovery (left side going up) -->
+                <path id="segment-discovery" class="loop-path"
+                    d="M 230,390
+                       C 150,390 120,340 120,260
+                       C 120,180 150,130 230,130
+                       C 250,130 265,132 280,135"
+                />
+
+                <!-- Segment 3: Consideration (top right) -->
+                <path id="segment-consideration" class="loop-path"
+                    d="M 500,210
+                       C 510,180 520,150 570,130
+                       C 640,100 700,130 750,180
+                       C 780,210 780,230 780,260"
+                />
+
+                <!-- Segment 4: Purchase (right side going down) -->
+                <path id="segment-purchase" class="loop-path"
+                    d="M 780,260
+                       C 780,340 750,390 670,390
+                       C 650,390 635,388 620,385"
+                />
+
+                <!-- Segment 6: Re-engagement (bottom left, crosses IN FRONT) -->
+                <path id="segment-reengagement" class="loop-path"
+                    d="M 410,310
+                       C 380,340 350,370 280,390
+                       C 250,400 240,395 230,390"
+                />
+            </g>
+
+            <!-- Complete path for traveler animation (invisible) -->
+            <path id="complete-path"
+                d="M 230,390
+                   C 150,390 120,340 120,260
+                   C 120,180 150,130 230,130
+                   C 250,130 265,132 280,135
+                   C 340,80 380,80 450,130
+                   C 480,150 490,180 490,210
+                   C 510,180 520,150 570,130
+                   C 640,100 700,130 750,180
+                   C 780,210 780,230 780,260
+                   C 780,340 750,390 670,390
+                   C 650,390 635,388 620,385
+                   C 610,440 570,440 500,390
+                   C 470,370 460,340 460,310
+                   C 380,340 350,370 280,390
+                   C 250,400 240,395 230,390 Z"
+                fill="none"
+                stroke="transparent"
+                stroke-width="1"
+            />
+
+            <!-- Stage Labels (SVG Text) -->
+            <text x="60" y="265" class="loop-label">DISCOVERY</text>
+            <text x="280" y="80" class="loop-label">AWARENESS</text>
+            <text x="620" y="80" class="loop-label">CONSIDERATION</text>
+            <text x="840" y="265" class="loop-label">PURCHASE</text>
+            <text x="670" y="460" class="loop-label">POST-PURCHASE</text>
+            <text x="230" y="460" class="loop-label">RE-ENGAGEMENT</text>
+
+            <!-- Hotspots with Pulsing Effect -->
+            <g class="hotspot-group" data-stage="discovery">
+                <circle class="hotspot-circle" cx="120" cy="260" r="24" />
+                <text class="hotspot-icon" x="120" y="260">+</text>
+            </g>
+
+            <g class="hotspot-group" data-stage="awareness">
+                <circle class="hotspot-circle" cx="280" cy="130" r="24" />
+                <text class="hotspot-icon" x="280" y="130">+</text>
+            </g>
+
+            <g class="hotspot-group" data-stage="consideration">
+                <circle class="hotspot-circle" cx="620" cy="130" r="24" />
+                <text class="hotspot-icon" x="620" y="130">+</text>
+            </g>
+
+            <g class="hotspot-group" data-stage="purchase">
+                <circle class="hotspot-circle" cx="780" cy="260" r="24" />
+                <text class="hotspot-icon" x="780" y="260">+</text>
+            </g>
+
+            <g class="hotspot-group" data-stage="post-purchase">
+                <circle class="hotspot-circle" cx="670" cy="390" r="24" />
+                <text class="hotspot-icon" x="670" y="390">+</text>
+            </g>
+
+            <g class="hotspot-group" data-stage="reengagement">
+                <circle class="hotspot-circle" cx="230" cy="390" r="24" />
+                <text class="hotspot-icon" x="230" y="390">+</text>
+            </g>
+
+            <!-- Traveling Dot -->
+            <g id="traveler">
+                <circle class="traveler-ring" cx="0" cy="0" r="8" />
+                <circle class="traveler-dot" cx="0" cy="0" r="8" />
+            </g>
+        </svg>
+    </div>
+
+    <script>
+        // Animate traveler dot along the complete path
+        const traveler = document.getElementById('traveler');
+        const path = document.getElementById('complete-path');
+
+        if (path && traveler) {
+            const pathLength = path.getTotalLength();
+            const duration = 12000; // 12 seconds for full loop
+
+            function animate() {
+                const startTime = Date.now();
+
+                function update() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = (elapsed % duration) / duration;
+                    const distance = progress * pathLength;
+                    const point = path.getPointAtLength(distance);
+
+                    traveler.setAttribute('transform', `translate(${point.x}, ${point.y})`);
+
+                    requestAnimationFrame(update);
+                }
+
+                update();
+            }
+
+            animate();
+        }
+
+        // Hotspot interaction
+        document.querySelectorAll('.hotspot-group').forEach(hotspot => {
+            hotspot.addEventListener('click', function() {
+                const stage = this.getAttribute('data-stage');
+                console.log('Clicked stage:', stage);
+                // Add your feature card logic here
+            });
+        });
+    </script>
+</body>
+</html>
